@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+	 <script src="script.js"></script> 
+	 <script type="text/javascript">
+	 	$(function() {
+   			$('a[href*=#]:not([href=#])').click(function() {
+   				var target = $(this.hash);
+ 				if (location.hostname == this.hostname) {
+ 					if (target.length !=0) {	 
+      					$('html,body').animate({
+              			 scrollTop: target.offset().top
+         			 	}, 1000);
+        			  	return false;
+      				}
+ 				}
+			});
+		});
+ 
+		$(document).ready(function() {
+			var stickyNavTop = $('nav').offset().top;
+        	var window_height = $(window).height();
+        	var nav = $('nav');
+        	var nav_height = nav.outerHeight();
+        	var doc_height = $(document).height();
+
+			$(window).scroll(function() {
+	    		stickyNav();
+	    		addActive();
+	    		
+			});
+
+			function stickyNav(){
+				var scrollTop = $(window).scrollTop();
+				if (scrollTop > stickyNavTop) {			
+				    $('#nav').addClass('sticky');
+				} else {
+				    $('#nav').removeClass('sticky');
+				}
+			};
+			function addActive() {
+				var scrollPos = $(window).scrollTop();
+
+				$('.section').each(function(){
+      				var top = $(this).offset().top - nav_height,
+      					bottom = top + $(this).outerHeight();
+      				if (scrollPos >= top && scrollPos <= bottom) {
+      					nav.find('a').removeClass('active')
+      					nav.find('a[href="#'+ $(this).attr('id') + '"]').addClass('active');
+
+
+      				}
+      				else if (scrollPos + window_height == doc_height) {
+   		 				if (!$('#nav a:last').hasClass('active')) {
+   		 					nav.find('a').removeClass('active')
+   		 					nav.find('a:last').addClass('active')
+   		 				}
+   		 			}
+   		 		});	
+			}
+		});
+
+	 </script>
+	<style>
+	  	#container {
+	  		width:1000px;
+	  		height:2020px;
+	  	
+	  		margin:0 auto;
+	  		border:1px solid black;
+
+	  	}
+	  	nav {
+	  		width:1000px;
+	  		height:30px;
+	  		background-color:pink;
+	  	}
+	
+		nav a {
+			padding:0px 40px 0px 40px;
+			text-decoration: none;
+			color:grey;
+			font-weight:bold;
+
+		}
+		.section {
+			width:1000px;
+			height:500px;
+			border:1px solid grey;
+		}
+		a.active {
+			text-decoration: underline;
+		} 
+		.sticky {
+		    position: fixed;
+		    width: 1000px;
+		    left: 50%;
+		    top: 0;
+		    margin-left:-500px;
+		    z-index: 100;
+		    border-top: 0;
+		}
+		#footer {
+			width:100%;
+			height:200px;
+			background-color:#ead;
+			position: relative;
+			text-align: center;
+		}
+	</style>
+
+</head>
+<body>
+
+	<div id="container">
+		<nav id="nav">
+			<a id="nav_section1" class="active" href="#section_1">Section 1</a>
+			<a id="nav_section2" href="#section_2">Section 2</a>
+			<a id="nav_section3" href="#section_3">Section 3</a>
+			<a id="nav_section4" href="#section_4">Section 4</a>
+		</nav>
+		<div class="section" id="section_1"></div>
+		<div class="section" id="section_2"></div>
+		<div class="section" id="section_3"></div>
+		<div class="section" id="section_4"></div>	
+	</div>
+	<div id="footer">
+		<h1>FOOTER</h1>
+	</div>
+</body>
+</html>
