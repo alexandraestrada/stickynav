@@ -2,98 +2,52 @@
 <html>
 <head>
 	<title></title>
+  <link href='https://fonts.googleapis.com/css?family=Lobster+Two:700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-	 <script src="script.js"></script> 
-	 <script type="text/javascript">
-	 	$(function() {
-   			$('a[href*=#]:not([href=#])').click(function() {
-   				var target = $(this.hash);
- 				if (location.hostname == this.hostname) {
- 					if (target.length !=0) {	 
-      					$('html,body').animate({
-              			 scrollTop: target.offset().top
-         			 	}, 1000);
-        			  	return false;
-      				}
- 				}
-			});
-		});
- 
-		$(document).ready(function() {
-			var stickyNavTop = $('nav').offset().top;
-        	var window_height = $(window).height();
-        	var nav = $('nav');
-        	var nav_height = nav.outerHeight();
-        	var doc_height = $(document).height();
-
-			$(window).scroll(function() {
-	    		stickyNav();
-	    		addActive();
-	    		
-			});
-
-			function stickyNav(){
-				var scrollTop = $(window).scrollTop();
-				if (scrollTop > stickyNavTop) {			
-				    $('#nav').addClass('sticky');
-				} else {
-				    $('#nav').removeClass('sticky');
-				}
-			};
-			function addActive() {
-				var scrollPos = $(window).scrollTop();
-
-				$('.section').each(function(){
-      				var top = $(this).offset().top - nav_height,
-      					bottom = top + $(this).outerHeight();
-      				if (scrollPos >= top && scrollPos <= bottom) {
-      					nav.find('a').removeClass('active')
-      					nav.find('a[href="#'+ $(this).attr('id') + '"]').addClass('active');
-
-
-      				}
-      				else if (scrollPos + window_height == doc_height) {
-   		 				if (!$('#nav a:last').hasClass('active')) {
-   		 					nav.find('a').removeClass('active')
-   		 					nav.find('a:last').addClass('active')
-   		 				}
-   		 			}
-   		 		});	
-			}
-		});
-
-	 </script>
 	<style>
-	  	#container {
-	  		width:1000px;
-	  		height:2020px;
-	  	
-	  		margin:0 auto;
-	  		border:1px solid black;
-
-	  	}
-	  	nav {
-	  		width:1000px;
-	  		height:30px;
-	  		background-color:pink;
-	  	}
-	
+    .debug {
+      border: 1px solid red;
+    }
+  	#container {
+  		width:1000px;
+  		height:2020px;
+  		margin:0 auto;
+  		/*border:1px solid black;*/
+  	}
+  	nav {
+  		width:1000px;
+  		height:50px;
+  		background-color: white;
+  	}
 		nav a {
+      margin: 0 40px;
 			padding:0px 40px 0px 40px;
 			text-decoration: none;
 			color:grey;
-			font-weight:bold;
-
+      font-family: 'Roboto Condensed', sans-serif;
 		}
+    ul {
+      padding-top: 10px;
+    }
+    li {
+      list-style-type: none;
+      display: inline;
+    }
 		.section {
 			width:1000px;
 			height:500px;
-			border:1px solid grey;
+      border-top:1px solid grey;
 		}
+    .section h1 {
+      padding-top: 80px;
+      text-align: center;
+      font-family: 'Lobster Two', cursive;
+      font-size: 8em;
+    }
 		a.active {
 			text-decoration: underline;
-		} 
+		}
 		.sticky {
 		    position: fixed;
 		    width: 1000px;
@@ -103,32 +57,100 @@
 		    z-index: 100;
 		    border-top: 0;
 		}
-		#footer {
+		footer {
 			width:100%;
 			height:200px;
-			background-color:#ead;
-			position: relative;
+			background-color: #333333;
+			/*position: relative;*/
 			text-align: center;
 		}
+    footer h1 {
+      padding-top: 60px;
+      text-align: center;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: 4em;
+      color: #c1c1c1;
+    }
 	</style>
 
 </head>
 <body>
-
 	<div id="container">
 		<nav id="nav">
-			<a id="nav_section1" class="active" href="#section_1">Section 1</a>
-			<a id="nav_section2" href="#section_2">Section 2</a>
-			<a id="nav_section3" href="#section_3">Section 3</a>
-			<a id="nav_section4" href="#section_4">Section 4</a>
+      <ul>
+        <li><a id="nav_section1" class="active" href="#section_1">Section 1</a></li>
+        <li><a id="nav_section2" href="#section_2">Section 2</a></li>
+        <li><a id="nav_section3" href="#section_3">Section 3</a></li>
+        <li><a id="nav_section4" href="#section_4">Section 4</a></li>
+      </ul>
 		</nav>
-		<div class="section" id="section_1"></div>
-		<div class="section" id="section_2"></div>
-		<div class="section" id="section_3"></div>
-		<div class="section" id="section_4"></div>	
+		<div class="section" id="section_1" style="color: #333333"><h1>Section 1</h1></div>
+		<div class="section" id="section_2" style="color: #474747"><h1>Section 2</h1></div>
+		<div class="section" id="section_3" style="color: #848484"><h1>Section 3</h1></div>
+		<div class="section" id="section_4" style="color: #c1c1c1"><h1>Section 4</h1></div>
 	</div>
-	<div id="footer">
-		<h1>FOOTER</h1>
-	</div>
+	<footer>
+    <h1>FOOTER</h1>
+  </footer>
+     <script type="text/javascript">
+     //smooth scroll that matches any href to an associated section id
+      $(function() {
+          $('a[href*=#]:not([href=#])').click(function() {
+            var target = $(this.hash);
+          if (location.hostname == this.hostname) {
+            if (target.length !=0) {
+                  $('html,body').animate({
+                       scrollTop: target.offset().top
+                  }, 1000);
+                    return false;
+                }
+          }
+        });
+      });
+      /*get information like widths, coordinates, and heights
+        on page load. then call stickyNav() and addActive() on window scroll */
+      $(document).ready(function() {
+        var stickyNavTop = $('nav').offset().top,
+            window_height = $(window).height(),
+            nav = $('nav'),
+            nav_height = nav.outerHeight(),
+            doc_height = $(document).height();
+
+        $(window).scroll(function() {
+            stickyNav();
+            addActive();
+
+        });
+        //add 'sticking' functionality-- position fixed
+        function stickyNav(){
+          var scrollTop = $(window).scrollTop();
+          if (scrollTop > stickyNavTop) {
+              $('#nav').addClass('sticky');
+          } else {
+              $('#nav').removeClass('sticky');
+          }
+        };
+        // add active class to identify what section is currently being selected 
+        function addActive() {
+          var scrollPos = $(window).scrollTop();
+          $('.section').each(function(){
+            var top = $(this).offset().top - nav_height,
+                bottom = top + $(this).outerHeight();
+            if (scrollPos >= top && scrollPos <= bottom) {
+              nav.find('a').removeClass('active');
+              nav.find('a[href="#'+ $(this).attr('id') + '"]').addClass('active');
+            }
+            else if (scrollPos + window_height == doc_height) {
+              if (!$('#nav a:last').hasClass('active')) {
+                nav.find('a').removeClass('active');
+                nav.find('a:last').addClass('active');
+              }
+            }
+          });
+        }
+      });
+
+     </script>
 </body>
+
 </html>
